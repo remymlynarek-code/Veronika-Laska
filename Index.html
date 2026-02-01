@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be my Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    overflow:hidden;
+}
+
+.card{
+    position:relative;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    padding:35px 30px 90px;
+    border-radius:25px;
+    width:90%;
+    max-width:360px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    text-align:center;
+}
+
+h1{
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:16px;
+    line-height:1.5;
+    margin-bottom:30px;
+}
+
+.button-zone{
+    position:relative;
+    height:160px;     /* zone de fuite */
+    margin-top:10px;
+}
+
+button{
+    font-size:16px;
+    padding:12px 26px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:transform 0.15s, box-shadow 0.15s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+#yes{
+    background:linear-gradient(135deg,#2ecc71,#27ae60);
+    color:white;
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+#no{
+    background:linear-gradient(135deg,#ff6b6b,#e74c3c);
+    color:white;
+    position:absolute;
+    top:80px;              /* JUSTE EN DESSOUS */
+    left:50%;
+    transform:translateX(-50%);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Hey Laska… Veronika 💕</h1>
+    <p>
+        From my heart to this screen…<br>
+        <strong>Will you be my Valentine?</strong>
+    </p>
+
+    <div class="button-zone" id="zone">
+        <button id="yes" onclick="sayYes()">Yes 💖</button>
+        <button id="no">No 😏</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const zone = document.getElementById("zone");
+
+function moveNo(){
+    const maxX = zone.clientWidth - noBtn.offsetWidth;
+    const maxY = zone.clientHeight - noBtn.offsetHeight;
+
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "none";
+}
+
+// PC
+noBtn.addEventListener("mouseover", moveNo);
+
+// Mobile
+noBtn.addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    moveNo();
+});
+
+function sayYes(){
+    document.body.innerHTML = `
+        <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            text-align:center;
+            font-family:'Segoe UI',Arial,sans-serif;
+            color:white;
+            background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+        ">
+            <h1 style="font-size:42px;">YEAAAAAAH 💘</h1>
+            <p style="font-size:18px; max-width:300px;">
+                You just made my heart smile.<br>
+                Happy Valentine’s Day ❤️
+            </p>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
